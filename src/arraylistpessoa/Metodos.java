@@ -55,11 +55,6 @@ for ( PessoasContato p : lista1 )
 	}
 	String msg = lista1.remove(aRemover) ? "Usuario Removido" : "Usuario nao existe";
 	System.out.println(msg);*/
-        
-        
-        
-        
-        
         System.out.print("\nDigite o nome da pessoa a ser removido: ");
         String k = scan.nextLine();
 
@@ -77,7 +72,7 @@ for ( PessoasContato p : lista1 )
 
         }
         String msg = lista1.remove(RemoverPessoa) ? "Usuario Removido" : "Usuario nao existe";
-        System.out.println("\n"+msg);
+        System.out.println("\n" + msg);
     }
 
     public void edicao() {
@@ -87,38 +82,31 @@ for ( PessoasContato p : lista1 )
 
         PessoasContato EditarPessoa = null;
         String name;
-         String tel;
-        
-        for (PessoasContato p:lista1) {
+        String tel;
 
-            
+        for (PessoasContato p : lista1) {
 
             if (p.getNome().equals(k)) {
 
                 EditarPessoa = p;
-                
+
                 System.out.print("\nDigite seu nome Completo: ");
                 name = scan.nextLine();
                 System.out.print("Digite seu Tel: ");
                 tel = scan.nextLine();
 
-                
-                
                 EditarPessoa.setNome(name);
                 EditarPessoa.setTel(tel);
-                
-            
 
-            }
-            else{
+            } else {
                 EditarPessoa = null;
             }
-            
+
         }
-         
-        String msg1 = (EditarPessoa!=null)?"Usuario Editado":"Usuario Nao Existe na Lista";
-        System.out.println ("\n"+msg1);
-         
+
+        String msg1 = (EditarPessoa != null) ? "Usuario Editado" : "Usuario Nao Existe na Lista";
+        System.out.println("\n" + msg1);
+
     }
 
     public void impressao() throws IOException {
@@ -126,7 +114,23 @@ for ( PessoasContato p : lista1 )
         Collections.sort(lista1); //Ordena os objetos por nome// 
         //for (int i = 0; i < lista1.size(); i++) {
         //  System.out.println(lista1.get(i));            
-        //} 
+        //}
+
+        try (FileWriter arq = new FileWriter("Contatos.txt")) {
+            PrintWriter gravarArq = new PrintWriter(arq);
+
+            for (int i = 0; i < lista1.size(); i++) {
+                gravarArq.println("---------------------------------------------");
+                gravarArq.println();
+                gravarArq.println("  Usuario ");
+                gravarArq.println();
+                gravarArq.println("\n Nome: " + lista1.get(i).getNome());
+                gravarArq.println("\n Tel: " + lista1.get(i).getTel());
+
+                gravarArq.println("---------------------------------------------");
+            }
+        }
+
         if (lista1.isEmpty()) {
 
             System.out.println("\nLista Vazia");
@@ -138,24 +142,6 @@ for ( PessoasContato p : lista1 )
 
             }
         }
-        
-        try (FileWriter arq = new FileWriter("Contatos.txt"))
-{
-	PrintWriter gravarArq = new PrintWriter(arq);
-
-	for (int i = 0; i < lista1.size(); i++)
-	{
-		gravarArq.println("---------------------------------------------");
-		gravarArq.println();
-		gravarArq.println("  Usuario ");
-		gravarArq.println();
-		gravarArq.println("\n Nome: " + lista1.get(i).getNome());
-		gravarArq.println("\n Tel: " + lista1.get(i).getTel());
-		
-
-		gravarArq.println("---------------------------------------------");
-	}
-}
 
     }
 
